@@ -6,7 +6,7 @@ from tkinter import *
 theme = ["#000000","#9CB5D6","#A0BBDC","#D1DDEC","#DEE7F2","#E8EEF6"]
 
 window = tk.Tk()   
-window.title("LifeReality") 
+window.title("Paths") 
 #window.iconbitmap('app_icon.ico') 
 
 window_width = window.winfo_screenwidth()
@@ -14,12 +14,79 @@ window_height = window.winfo_screenheight()
 
 window.resizable(False, False)
 
-main_frame = tk.Frame(window, bg=theme[3],height=window_height, width=window_width) 
+frames = tk.Frame(window, bg=theme[3],height=window_height, width=window_width) 
+frames.pack(fill='both', expand=True) 
+frames.pack_propagate(False) 
+
+
+#################### START FRAME #########################
+
+start_frame = tk.Frame(frames, bg=theme[3],height=window_height, width=window_width) 
+start_frame.pack(fill='both', expand=True) 
+start_frame.pack_propagate(False) 
+start_frame.pack_forget()
+
+welcome_title = tk.Label(
+    start_frame,
+    text="Welcome to Paths.",
+    font=("Impact", 40),  
+    fg="black",         
+    bg= start_frame.cget("bg")           
+)
+welcome_title.pack(pady=15, anchor='center')
+
+game_description = tk.Label(
+    start_frame,
+    text="This is your story." \
+    "\n Every decision you make will shape the life you live — the people you meet, the places you travel, and the career you build." \
+    "\n You will choose your background, personality, and ambitions. Some paths will be easy. Others will test your determination. " \
+    "\n There is no single correct way to play. ",
+    font=("Impact", 20),  
+    fg="black",         
+    bg= start_frame.cget("bg")           
+)
+
+game_description.pack(pady=15, anchor='center')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############ GAME START ##################
+
+main_frame = tk.Frame(frames, bg=theme[3],height=window_height, width=window_width) 
 main_frame.pack(fill='both', expand=True) 
 main_frame.pack_propagate(False) 
 
 dialogue_width = 1050
 summary_width = window_width - dialogue_width
+
 
 ########## TITLE FRAME ####################
 
