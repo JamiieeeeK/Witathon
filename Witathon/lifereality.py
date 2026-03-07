@@ -1,90 +1,164 @@
-
-# import tkinter as tk 
-# from tkinter import *
-
-
-# theme = ["#000000","#9CB5D6","#A0BBDC","#D1DDEC","#DEE7F2","#E8EEF6"]
-
-# window = tk.Tk()   
-# window.title("LifeReality") 
-# #window.iconbitmap('app_icon.ico') 
-
-# window_width = window.winfo_screenwidth()
-# window_height = window.winfo_screenheight()
-
-# window.resizable(False, False)
-
-# main_frame = tk.Frame(window, bg=theme[3],height=window_height, width=window_width) 
-# main_frame.pack(fill='both', expand=True) 
-# main_frame.pack_propagate(False) 
-
-# dialogue_width = 1000
-# summary_width = window_width - dialogue_width
-
-# summary_frame = tk.Frame(main_frame, bg=theme[5],height=window_height, width=summary_width, borderwidth=2, relief="groove") 
-# summary_frame.pack(fill='x', expand=True, side="left") 
-# summary_frame.pack_propagate(False) 
-
-# dialogue_frame = tk.Frame(main_frame, bg=theme[4],height=window_height, width=dialogue_width, borderwidth=2, relief="groove") 
-# dialogue_frame.pack(fill='x', expand=True, side="right") 
-# dialogue_frame.pack_propagate(False) 
-
-# summary_box = Text(summary_frame, width=40, height=10)
-
-# window.mainloop()
-
 import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 from game_logic import Game
 
 theme = ["#000000", "#9CB5D6", "#A0BBDC", "#D1DDEC", "#DEE7F2", "#E8EEF6"]
-
 
 class LifeRealityUI:
     def __init__(self, root):
         self.root = root
         self.root.title("LifeReality")
-        self.root.geometry("1200x700")
+        self.root.geometry("1400x800")
         self.root.resizable(False, False)
 
         self.game = Game()
 
-        self.main_frame = tk.Frame(root, bg=theme[3])
-        self.main_frame.pack(fill="both", expand=True)
+        self.window_width = 1400
+        self.window_height = 800
+        self.dialogue_width = 1050
+        self.summary_width = self.window_width - self.dialogue_width
 
-        self.summary_frame = tk.Frame(self.main_frame, bg=theme[5], width=300)
+        self.main_frame = tk.Frame(
+            self.root,
+            bg=theme[3],
+            height=self.window_height,
+            width=self.window_width
+        )
+        self.main_frame.pack(fill="both", expand=True)
+        self.main_frame.pack_propagate(False)
+
+        # -------- TITLE FRAME --------
+        self.title_frame = tk.Frame(
+            self.main_frame,
+            bg=theme[2],
+            height=100,
+            width=self.window_width
+        )
+        self.title_frame.pack(fill="x", side="top")
+        self.title_frame.pack_propagate(False)
+
+        self.title_stage = tk.Label(
+            self.title_frame,
+            text="Paths",
+            font=("Impact", 40),
+            fg="black",
+            bg=theme[2]
+        )
+        self.title_stage.pack(pady=15)
+
+        # -------- CONTENT FRAME --------
+        self.content_frame = tk.Frame(
+            self.main_frame,
+            bg=theme[3],
+            height=self.window_height - 200,
+            width=self.window_width
+        )
+        self.content_frame.pack(fill="both", expand=True)
+        self.content_frame.pack_propagate(False)
+
+        # -------- SUMMARY FRAME --------
+        self.summary_frame = tk.Frame(
+            self.content_frame,
+            bg=theme[2],
+            height=self.window_height - 200,
+            width=self.summary_width
+        )
         self.summary_frame.pack(fill="y", side="left")
         self.summary_frame.pack_propagate(False)
 
-        self.dialogue_frame = tk.Frame(self.main_frame, bg=theme[4])
-        self.dialogue_frame.pack(fill="both", expand=True, side="right")
+        self.text_frame = tk.Frame(self.summary_frame, bg=theme[2])
+        self.text_frame.pack(pady=20)
 
-        self.summary_label = tk.Label(
-            self.summary_frame,
-            text="",
-            bg=theme[5],
-            justify="left",
-            font=("Arial", 14)
+        self.summary_box = tk.Text(self.text_frame, width=40, height=35)
+        self.summary_box.pack(side=LEFT, fill="y")
+
+        self.summary_scrollbar = ttk.Scrollbar(
+            self.text_frame,
+            orient="vertical",
+            command=self.summary_box.yview
         )
-        self.summary_label.pack(padx=20, pady=20, anchor="nw")
+        self.summary_scrollbar.pack(side=RIGHT, fill=Y)
 
-        self.text_label = tk.Label(
-            self.dialogue_frame,
-            text="",
+        self.summary_box.config(yscrollcommand=self.summary_scrollbar.set)
+        self.summary_box.config(state="disabled")
+
+        self.dialogue_frame = tk.Frame(
+            self.content_frame,
             bg=theme[4],
-            wraplength=700,
-            justify="left",
-            font=("Arial", 18)
+            height=self.window_height - 200,
+            width=self.dialogue_width
         )
-        self.text_label.pack(padx=30, pady=30, anchor="nw")
+        self.dialogue_frame.pack(fill="both", expand=True, side="right")
+        self.dialogue_frame.pack_propagate(False)
 
-        self.choices_frame = tk.Frame(self.dialogue_frame, bg=theme[4])
-        self.choices_frame.pack(padx=30, pady=20, anchor="nw")
+        self.description_frame = tk.Frame(
+            self.dialogue_frame,
+            bg=theme[2],
+            width=200
+        )
+        self.description_frame.pack(side="right", fill="y")
+        self.description_frame.pack_propagate(False)
+
+        self.main_text_frame = tk.Frame(
+            self.dialogue_frame,
+            bg=theme[4]
+        )
+        self.main_text_frame.pack(
+            side="left",
+            fill="both",
+            expand=True,
+            padx=5,
+            pady=20
+        )
+
+        self.dialogue_box = tk.Text(
+            self.main_text_frame,
+            width=90,
+            height=35,
+            wrap="word"
+        )
+        self.dialogue_box.pack(side="left", fill="both", expand=True)
+
+        self.dialogue_scrollbar = ttk.Scrollbar(
+            self.main_text_frame,
+            orient="vertical",
+            command=self.dialogue_box.yview
+        )
+        self.dialogue_scrollbar.pack(side="right", fill="y")
+
+        self.dialogue_box.config(yscrollcommand=self.dialogue_scrollbar.set)
+        self.dialogue_box.config(state="disabled")
+
+        self.choices_frame = tk.Frame(self.description_frame, bg=theme[2])
+        self.choices_frame.pack(padx=10, pady=20, anchor="n")
+
+        self.bottom_frame = tk.Frame(
+            self.main_frame,
+            bg=theme[2],
+            height=100,
+            width=self.window_width
+        )
+        self.bottom_frame.pack(fill="x", side="bottom")
+        self.bottom_frame.pack_propagate(False)
 
         self.render_scene()
 
     def clear_choices(self):
         for widget in self.choices_frame.winfo_children():
             widget.destroy()
+
+    def update_summary_box(self):
+        self.summary_box.config(state="normal")
+        self.summary_box.delete("1.0", tk.END)
+        self.summary_box.insert(tk.END, self.game.get_summary())
+        self.summary_box.config(state="disabled")
+
+    def update_dialogue_box(self, text):
+        self.dialogue_box.config(state="normal")
+        self.dialogue_box.delete("1.0", tk.END)
+        self.dialogue_box.insert(tk.END, text)
+        self.dialogue_box.config(state="disabled")
 
     def on_choice_click(self, choice_index):
         self.game.make_choice(choice_index)
@@ -93,8 +167,8 @@ class LifeRealityUI:
     def render_scene(self):
         scene = self.game.get_current_scene()
 
-        self.text_label.config(text=scene["text"])
-        self.summary_label.config(text=self.game.get_summary())
+        self.update_dialogue_box(scene["text"])
+        self.update_summary_box()
 
         self.clear_choices()
 
@@ -102,10 +176,10 @@ class LifeRealityUI:
             end_label = tk.Label(
                 self.choices_frame,
                 text="End of this path.",
-                bg=theme[4],
+                bg=theme[2],
                 font=("Arial", 14)
             )
-            end_label.pack(anchor="w")
+            end_label.pack(anchor="w", pady=5)
             return
 
         for i, choice in enumerate(scene["choices"]):
@@ -113,7 +187,7 @@ class LifeRealityUI:
                 self.choices_frame,
                 text=choice["text"],
                 command=lambda idx=i: self.on_choice_click(idx),
-                width=25
+                width=20
             )
             btn.pack(anchor="w", pady=5)
 
