@@ -7,20 +7,19 @@ class GameState:
 
 scenes = {
     "start": {
-        "text": "Welcome to Flip the Script. This is your life. \n"
-                "The world you were born into already had a plan for you — shaped by your gender, your background, and the expectations of everyone around you." 
-                "Some paths will be wide open. Others will be quietly closed before you ever reach them. \n"
-                "There is no single correct way to live. But not every path is equally available to everyone.",
+        "text": "You are sixteen. You have spent your whole life being shaped by a world that had opinions about you before you could form your own. \n"
+                "The clothes you were steered toward, the ambitions that were quietly encouraged or gently discouraged, the way you learned to take up less space in a room. \n"  
+                "You are smart — people have always said so — but smart has never felt like enough on its own. The world wants you to also be agreeable. Likeable. Easy. \n",
         "choices": [
             {
-                "text": "Small Town",
+                "text": "Go to university",
                 "next_scene": "career",
-                "effects": {"location": "Small Town", "happiness": 5}
+                "effects": {"location": "Small Town"}
             },
             {
                 "text": "Big City",
                 "next_scene": "career",
-                "effects": {"location": "Big City", "money": 10}
+                "effects": {"location": "Big City"}
             }
         ]
     },
@@ -77,6 +76,6 @@ class Game:
         return (
             f"{self.state.name}\n"
             f"{self.state.location}"
-          
+           
             f"{self.state.path}"
         )

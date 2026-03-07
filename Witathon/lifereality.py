@@ -416,7 +416,6 @@ class LifeRealityUI:
             )
             btn.pack(anchor="w", pady=5)
 
-
 root = tk.Tk()
 app = LifeRealityUI(root)
 root.mainloop()
