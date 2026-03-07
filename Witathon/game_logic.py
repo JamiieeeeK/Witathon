@@ -62,9 +62,9 @@ class Game:
         for key, value in effects.items():
             current = getattr(self.state, key)
             if isinstance(current, int):
-                setattr(self.state, key, current + value)
+                setattr(self.state, key, current + value + "\n")
             else:
-                setattr(self.state, key, value)
+                setattr(self.state, key, value + "\n")
 
     def make_choice(self, choice_index):
         scene = self.get_current_scene()
