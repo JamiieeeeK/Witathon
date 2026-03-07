@@ -119,7 +119,7 @@ class LifeRealityUI:
 
         self.author_label = tk.Label(
             self.title_author,
-            text="Paths",
+            text="Create your character",
             font=("Impact", 40),
             fg="black",
             bg=self.authorization_page.cget("bg")
@@ -135,6 +135,96 @@ class LifeRealityUI:
         )
         self.content_author.pack(fill="both", expand=True)
         self.content_author.pack_propagate(False)
+
+        # Center everything inside
+        self.content_author.pack_propagate(False)
+
+        # NAME LABEL
+        self.name_label = tk.Label(
+            self.content_author,
+            text="Input your name:",
+            font=("Impact", 20),
+            fg="black",
+            bg=self.authorization_page.cget("bg"),
+            anchor="center",
+            justify="center"
+        )
+        self.name_label.pack(pady=15)
+
+        self.name = tk.StringVar()
+
+        # NAME ENTRY
+        self.name_entry = tk.Entry(
+            self.content_author,
+            textvariable=self.name,
+            font=("Impact", 20),
+            width=20,
+            justify="center"
+        )
+        self.name_entry.pack(pady=20)
+
+        # GENDER LABEL
+        self.gender_label = tk.Label(
+            self.content_author,
+            text="Choose your gender:",
+            font=("Impact", 20),
+            fg="black",
+            bg=self.authorization_page.cget("bg"),
+            anchor="center",
+            justify="center"
+        )
+        self.gender_label.pack(pady=15)
+
+        self.gender = tk.StringVar()
+
+        # RADIOBUTTON FRAME
+        self.frame = tk.Frame(
+            self.content_author,
+            bg=self.authorization_page.cget("bg")
+        )
+        self.frame.pack(pady=10)
+
+        self.gender.set("") 
+
+        # RADIOBUTTONS
+        tk.Radiobutton(
+            self.frame,
+            text="Male",
+            variable=self.gender,
+            value="male",
+            font=("Impact", 20),
+            activebackground="#63b3ed",
+            activeforeground="white",
+            bg=self.authorization_page.cget("bg")
+        ).pack(side="left", padx=50)
+
+        tk.Radiobutton(
+            self.frame,
+            text="Female",
+            variable=self.gender,
+            value="female",
+            font=("Impact", 20),
+            activebackground="#63b3ed",
+            activeforeground="white",
+            bg=self.authorization_page.cget("bg")
+        ).pack(side="left", padx=50)
+
+        self.next_button = tk.Button(
+            self.content_author,
+            text="Next",
+            font=("Impact", 20),
+            fg="white",            
+            bg=theme[6],          
+            activebackground="#63b3ed",  
+            activeforeground="white",
+            relief="raised",       
+            bd=5,                  
+            padx=20,
+            pady=10,
+            cursor="hand2",        
+            command=self.game_next       
+        )
+        self.next_button.pack(pady=30)
 
 
 
@@ -274,6 +364,9 @@ class LifeRealityUI:
 
     def game_start(self):
         self.start_page.pack_forget()
+
+    def game_next(self):
+        return 0
 
 
     def clear_choices(self):
