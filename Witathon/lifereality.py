@@ -14,7 +14,7 @@ class LifeRealityUI:
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
         self.icon_path = os.path.join(self.script_dir, "healthy.ico")
 
-        self.window.iconbitmap(self.icon_path)
+        # self.window.iconbitmap(self.icon_path)
         self.window.resizable(False, False)
 
         self.game = Game()
@@ -234,12 +234,6 @@ class LifeRealityUI:
         )
         self.next_button.pack(pady=30)
 
-
-
-
-
-
-
         # -------- PAGE 3 -------------
 
         self.dialogue_width = 1050
@@ -372,10 +366,11 @@ class LifeRealityUI:
 
     def game_start(self):
         self.start_page.pack_forget()
+        self.authorization_page.pack(fill="both", expand=True)
 
     def game_next(self):
-        return 0
-
+        self.authorization_page.pack_forget()
+        self.main_frame.pack(fill="both", expand=True)
 
     def clear_choices(self):
         for widget in self.choices_frame.winfo_children():
