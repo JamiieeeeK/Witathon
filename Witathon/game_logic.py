@@ -6,7 +6,6 @@ class GameState:
         self.field = ""
         self.current_scene = "start"
 
-
 scenes = {
 
     "start": {
