@@ -24,7 +24,7 @@ summary_width = window_width - dialogue_width
 ########## TITLE FRAME ####################
 
 title_frame = tk.Frame(main_frame, bg=theme[2],height=100, width=summary_width) 
-title_frame.pack(fill='x', expand=True, side="top")
+title_frame.pack(fill='x', expand=True)
 title_frame.pack_propagate(False) 
 
 title_stage = tk.Label(
@@ -36,14 +36,18 @@ title_stage = tk.Label(
 )
 title_stage.pack(pady=15)
 
+window.update()
+
 ################ MIDDLE FRAME ################
 
-
+middle_frame = tk.Frame(main_frame, bg=theme[3],height=window_height-title_frame.winfo_height()*2-100, width=summary_width) 
+middle_frame.pack(fill='x', expand=True)
+middle_frame.pack_propagate(False) 
 
 
 ######## SUMMARY FRAME#####################
 
-summary_frame = tk.Frame(main_frame, bg=theme[2],height=window_height-title_frame.winfo_height()*2, width=summary_width) 
+summary_frame = tk.Frame(middle_frame, bg=theme[2],height=window_height-title_frame.winfo_height()*2, width=summary_width) 
 summary_frame.pack(fill='x', expand=True, side="left")
 summary_frame.pack_propagate(False) 
 
@@ -61,7 +65,7 @@ summary_box.config(state='disabled')
 
 ############## DIALOGUE FRAME #####################
 
-dialogue_frame = tk.Frame(main_frame, bg=theme[4], height=window_height-title_frame.winfo_height()*2, width=dialogue_width)
+dialogue_frame = tk.Frame(middle_frame, bg=theme[4], height=window_height-title_frame.winfo_height()*2, width=dialogue_width)
 dialogue_frame.pack(fill='none', expand=True, side="right")
 dialogue_frame.pack_propagate(False)
 
@@ -83,8 +87,8 @@ dialogue_box.config(state='disabled')
 
 ############# BOTTOM FRAME ##################
 
-bottom_frame = tk.Frame(main_frame, bg=theme[2],height=title_frame.winfo_height(), width=summary_width) 
-bottom_frame.pack(fill='x', expand=True, side="bottom")
+bottom_frame = tk.Frame(main_frame, bg=theme[2],height=title_frame.winfo_height()+100, width=summary_width) 
+bottom_frame.pack(fill='x', expand=True)
 bottom_frame.pack_propagate(False) 
 
 
