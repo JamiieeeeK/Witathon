@@ -90,11 +90,11 @@ scenes = {
             "What does your working life look like?"
         ),
         "choices": [
-            {"text": "Climbing a traditional corporate structure", "next_scene": "relationships"},
-            {"text": "Building something of your own", "next_scene": "relationships"},
-            {"text": "A creative or independent path", "next_scene": "relationships"},
-            {"text": "A caregiving or community-focused role", "next_scene": "relationships"},
-            {"text": "Still figuring it out — no clear direction yet", "next_scene": "relationships"}
+            {"text": "Climbing a traditional corporate structure", "next_scene": "relationships", "effects": {"career": "climbing up steadily in a company"}},
+            {"text": "Building something of your own", "next_scene": "relationships", "effects": {"career": "start something new"}},
+            {"text": "A creative or independent path", "next_scene": "relationships", "effects": {"career": "creative career path"}},
+            {"text": "A caregiving or community-focused role", "next_scene": "relationships", "effects": {"career": "caregiving or community-focused role"}},
+            {"text": "Still figuring it out — no clear direction yet", "next_scene": "relationships", "effects": {"career": "Confused"}}
         ]
     },
 
@@ -106,11 +106,11 @@ scenes = {
             "What does your relationship life look like?"
         ),
         "choices": [
-            {"text": "Long-term partnership leading to marriage", "next_scene": "family"},
-            {"text": "Long-term partnership without marriage", "next_scene": "family"},
-            {"text": "Multiple relationships — no single commitment", "next_scene": "family"},
-            {"text": "Chosen solitude — a full life without romantic partnership", "next_scene": "family"},
-            {"text": "A relationship shaped by outside pressure", "next_scene": "family"}
+            {"text": "Long-term partnership leading to marriage", "next_scene": "family", "effects": {"status": "healthy relationship planning on marrage"}},
+            {"text": "Long-term partnership without marriage", "next_scene": "family", "effects": {"status": "healthy long term relationship"}},
+            {"text": "Multiple relationships — no single commitment", "next_scene": "family", "effects": {"status": "no commitment in relationships"}},
+            {"text": "Chosen solitude — a full life without romantic partnership", "next_scene": "family", "effects": {"status": "proud to be single"}},
+            {"text": "A relationship shaped by outside pressure", "next_scene": "family", "effects": {"status": "A relationship shaped by outside pressure"}}
         ]
     },
 
@@ -122,11 +122,11 @@ scenes = {
             "What path do you take?"
         ),
         "choices": [
-            {"text": "Choose to have children", "next_scene": "midlife"},
-            {"text": "Choose not to have children", "next_scene": "midlife"},
-            {"text": "Have children earlier than planned", "next_scene": "midlife"},
-            {"text": "Raise children as a single parent", "next_scene": "midlife"},
-            {"text": "Build a family outside traditional structures", "next_scene": "midlife"}
+            {"text": "Choose to have children", "next_scene": "midlife", "effects": {"home": "going to have children"}},
+            {"text": "Choose not to have children", "next_scene": "midlife", "effects": {"home": "decided not to have children"}},
+            {"text": "Have children earlier than planned", "next_scene": "midlife", "effects": {"home": "have children earlier than planned"}},
+            {"text": "Raise children as a single parent", "next_scene": "midlife", "effects": {"home": "as single parent with children"}},
+            {"text": "Build a family outside traditional structures", "next_scene": "midlife", "effects": {"home": "build a family outside traditional structures"}}
         ]
     },
 
@@ -137,11 +137,11 @@ scenes = {
             "Where do you go from here?"
         ),
         "choices": [
-            {"text": "Stay the course", "next_scene": "laterlife"},
-            {"text": "Shift careers", "next_scene": "laterlife"},
-            {"text": "Relocate and start fresh", "next_scene": "laterlife"},
-            {"text": "Revisit your identity", "next_scene": "laterlife"},
-            {"text": "Simplify and focus on what matters most", "next_scene": "laterlife"}
+            {"text": "Stay the course", "next_scene": "laterlife", "effects": {"work": "stay the course"}},
+            {"text": "Shift careers", "next_scene": "laterlife", "effects": {"work": "shift career"}},
+            {"text": "Relocate and start fresh", "next_scene": "laterlife", "effects": {"work": "relocate and start fresh"}},
+            {"text": "Revisit your identity", "next_scene": "laterlife", "effects": {"work": "revisit your identity"}},
+            {"text": "Simplify and focus on what matters most", "next_scene": "laterlife", "effects": {"work": "focus on most important matters"}}
         ]
     },
 
@@ -152,10 +152,10 @@ scenes = {
             "How do you spend this chapter?"
         ),
         "choices": [
-            {"text": "Mentorship", "next_scene": "ending"},
-            {"text": "Reinvention", "next_scene": "ending"},
-            {"text": "Rest and reflection", "next_scene": "ending"},
-            {"text": "Advocacy and pushing for change", "next_scene": "ending"}
+            {"text": "Mentorship", "next_scene": "ending", "effects": {"laterlife": "start a mentorship"}},
+            {"text": "Reinvention", "next_scene": "ending", "effects": {"laterlife": "reinvention"}},
+            {"text": "Rest and reflection", "next_scene": "ending", "effects": {"laterlife": "rest and reflect on earlier life"}},
+            {"text": "Advocacy and pushing for change", "next_scene": "ending", "effects": {"laterlife": "advocacy and pushing for change "}}
         ]
     },
 
