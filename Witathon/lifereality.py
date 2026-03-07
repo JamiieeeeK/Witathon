@@ -111,7 +111,7 @@ class LifeRealityUI:
         self.title_author = tk.Frame(
             self.authorization_page,
             bg=self.authorization_page.cget("bg"),
-            height=100,
+            height=200,
             width=self.window_width
         )
         self.title_author.pack(fill="x", side="top")
@@ -124,17 +124,25 @@ class LifeRealityUI:
             fg="black",
             bg=self.authorization_page.cget("bg")
         )
-        self.author_label.pack(pady=15)
+        self.author_label.pack(pady=40)
 
         # -------- CONTENT FRAME --------
-        self.content_author = tk.Frame(
+
+        self.page_author = tk.Frame(
             self.authorization_page,
             bg=self.authorization_page.cget("bg"),
             height=self.window_height - 200,
             width=self.window_width
         )
-        self.content_author.pack(fill="both", expand=True)
-        self.content_author.pack_propagate(False)
+        self.page_author.pack(fill="both", expand=True)
+        self.page_author.pack_propagate(False)
+
+
+        self.content_author = tk.Frame(
+            self.page_author,
+            bg=self.authorization_page.cget("bg"),
+        )
+        self.content_author.pack(fill="both", expand=True, anchor="center", pady=10)
 
         # Center everything inside
         self.content_author.pack_propagate(False)
