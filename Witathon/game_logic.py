@@ -182,12 +182,13 @@ class Game:
 
     def apply_effects(self, effects):
         for key, value in effects.items():
+            shortSummary = short(self.state.name,self.get_current_scene()["text"], value)
+            print(shortSummary)
             setattr(self.state, key, value)
 
     def make_choice(self, choice_index):
         scene = self.get_current_scene()
         choice = scene["choices"][choice_index]
-
         self.apply_effects(choice.get("effects", {}))
         self.state.current_scene = choice["next_scene"]
 
