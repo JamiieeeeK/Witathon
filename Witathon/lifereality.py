@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import os
 from game_logic import Game
 
 theme = ["#000000", "#9CB5D6", "#A0BBDC", "#D1DDEC", "#DEE7F2", "#E8EEF6", "#8fa7bf"]
@@ -9,7 +10,11 @@ class LifeRealityUI:
     def __init__(self, window):
         self.window = window
         self.window.title("Paths")
-        #self.window.iconbitmap('app_icon.ico') #icon of app
+
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.icon_path = os.path.join(self.script_dir, "healthy.ico")
+
+        self.window.iconbitmap(self.icon_path)
         self.window.resizable(False, False)
 
         self.game = Game()
@@ -17,7 +22,10 @@ class LifeRealityUI:
         self.window_width = window.winfo_screenwidth()
         self.window_height = window.winfo_screenheight()
 
-        self.window.geometry(f'{self.window_width}x{self.window_height}')
+        center_x = int(self.window_width /2 - self.window_width /2)
+        center_y = int(self.window_height /2 - self.window_height /2)
+
+        self.window.geometry(f'{self.window_width}x{self.window_height}+{center_x}+{center_y}')
 
         self.frames = tk.Frame(
             self.window,
@@ -27,7 +35,6 @@ class LifeRealityUI:
         )
         self.frames.pack(fill="both", expand=True)
         self.frames.pack_propagate(False)
-
 
 
         # --------- PAGE 1 ------------
@@ -83,18 +90,52 @@ class LifeRealityUI:
             padx=20,
             pady=10,
             cursor="hand2",        
-            #command=on_start       
+            command=self.game_start       
         )
         self.start_button.pack(pady=30)
 
 
+        # -------- PAGE 2 -------------
 
+        self.authorization_page = tk.Frame(
+            self.frames,
+            bg=theme[4],
+            height=self.window_height,
+            width=self.window_width
+        )
+        
+        self.authorization_page.pack(fill="both", expand=True)
+        self.authorization_page.pack_propagate(False)
 
+        # -------- TITLE FRAME --------
+        self.title_author = tk.Frame(
+            self.authorization_page,
+            bg=self.authorization_page.cget("bg"),
+            height=100,
+            width=self.window_width
+        )
+        self.title_author.pack(fill="x", side="top")
+        self.title_author.pack_propagate(False)
 
+        self.author_label = tk.Label(
+            self.title_author,
+            text="Paths",
+            font=("Impact", 40),
+            fg="black",
+            bg=self.authorization_page.cget("bg")
+        )
+        self.author_label.pack(pady=15)
 
+        # -------- CONTENT FRAME --------
+        self.content_author = tk.Frame(
+            self.authorization_page,
+            bg=self.authorization_page.cget("bg"),
+            height=self.window_height - 200,
+            width=self.window_width
+        )
+        self.content_author.pack(fill="both", expand=True)
+        self.content_author.pack_propagate(False)
 
-
-        #self.start_page.pack_forget()
 
 
 
@@ -230,6 +271,9 @@ class LifeRealityUI:
         self.bottom_frame.pack_propagate(False)
 
         self.render_scene()
+
+    def game_start(self):
+        self.start_page.pack_forget()
 
 
     def clear_choices(self):
