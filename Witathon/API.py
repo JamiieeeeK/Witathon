@@ -1,6 +1,6 @@
 #download: python -m pip install google-genai
 from google import genai
-client = genai.Client(api_key="AIzaSyAyv3MXmZh-ZsJBTBzrPbztd2YXn310vdE")
+client = genai.Client(api_key="AIzaSyAtoTehAB8OhFQEFIxpxMHVAHLMQiXn6-0")
 def short(character, setting, choice):
     response = client.models.generate_content(
         model="gemini-2.5-flash",
