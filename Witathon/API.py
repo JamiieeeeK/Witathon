@@ -1,5 +1,6 @@
 #download: python -m pip install google-genai
 from google import genai
+#AIzaSyD_EuaMxPfuLnV3nwQlMhK1GxWjIb8GJs4
 client = genai.Client(api_key="AIzaSyAtoTehAB8OhFQEFIxpxMHVAHLMQiXn6-0")
 def short(character, setting, choice):
     response = client.models.generate_content(
