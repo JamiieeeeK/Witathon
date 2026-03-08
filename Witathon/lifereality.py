@@ -454,6 +454,21 @@ class LifeRealityUI:
             inner.bind("<Leave>", lambda e, w=inner: w.config(bg="#f7f7f7"))
             label.bind("<Enter>", lambda e, w=inner, l=label: (w.config(bg="#efefef"), l.config(bg="#efefef")))
             label.bind("<Leave>", lambda e, w=inner, l=label: (w.config(bg="#f7f7f7"), l.config(bg="#f7f7f7")))
+            
+            def on_choice_click(self, index):
+                self.game.make_choice(index)
+
+                self.summary_box.config(state="normal")
+                self.summary_box.delete("1.0", "end")
+                self.summary_box.insert("end", self.game.get_summary())
+                self.summary_box.config(state="disabled")
+
+                self.dialogue_box.config(state="normal")
+                self.dialogue_box.delete("1.0", "end")
+                self.dialogue_box.insert("end", self.game.get_current_scene()["text"])
+                self.dialogue_box.config(state="disabled")
+
+                self.render_choices()
 
             
 
