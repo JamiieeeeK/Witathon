@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import os
 from game_logic import Game
+from API import summary
 
 theme = ["#000000", "#9CB5D6", "#A0BBDC", "#D1DDEC", "#DEE7F2", "#E8EEF6", "#8fa7bf"]
 
@@ -38,8 +39,6 @@ class LifeRealityUI:
         # center_y = int((screen_height / 2) - (self.window_height / 2))
 
         self.window.geometry(f"{self.window_width}x{self.window_height}+{center_x}+{center_y}")
-
-        
 
         self.frames = tk.Frame(
             self.window,
@@ -174,6 +173,7 @@ class LifeRealityUI:
         self.name_label.pack(pady=15)
 
         self.name = tk.StringVar()
+        self.name.get()
 
         # NAME ENTRY
         self.name_entry = tk.Entry(
@@ -211,9 +211,9 @@ class LifeRealityUI:
         # RADIOBUTTONS
         tk.Radiobutton(
             self.frame,
-            text="Male",
+            text="Boy",
             variable=self.gender,
-            value="male",
+            value="Boy",
             font=("Impact", 20),
             activebackground="#63b3ed",
             activeforeground="white",
@@ -222,9 +222,20 @@ class LifeRealityUI:
 
         tk.Radiobutton(
             self.frame,
-            text="Female",
+            text="Girl",
             variable=self.gender,
-            value="female",
+            value="Girl",
+            font=("Impact", 20),
+            activebackground="#63b3ed",
+            activeforeground="white",
+            bg=self.authorization_page.cget("bg")
+        ).pack(side="left", padx=50)
+
+        tk.Radiobutton(
+            self.frame,
+            text="Prefer not to say",
+            variable=self.gender,
+            value="Other",
             font=("Impact", 20),
             activebackground="#63b3ed",
             activeforeground="white",
@@ -282,7 +293,7 @@ class LifeRealityUI:
             self.main_frame,
             bg=theme[3],
             width=1150,
-            height=650
+            height=850
         )
         self.center_wrapper.place(relx=0.5, rely=0.18, anchor="n")
         self.center_wrapper.pack_propagate(False)
@@ -292,7 +303,7 @@ class LifeRealityUI:
             self.center_wrapper,
             bg=theme[4],
             width=230,
-            height=500
+            height=620
         )
         self.summary_frame.pack(side="left", padx=(0, 25), anchor="n")
         self.summary_frame.pack_propagate(False)
@@ -317,7 +328,7 @@ class LifeRealityUI:
             self.center_wrapper,
             bg=theme[3],
             width=895,
-            height=500
+            height=750
         )
         self.right_panel.pack(side="left", anchor="n")
         self.right_panel.pack_propagate(False)
@@ -353,7 +364,7 @@ class LifeRealityUI:
             self.right_panel,
             bg=theme[3],
             width=895,
-            height=300
+            height=420
         )
         self.bottom_frame.pack(fill="x", pady=(18, 0))
         self.bottom_frame.pack_propagate(False)
@@ -372,8 +383,15 @@ class LifeRealityUI:
         self.authorization_page.pack(fill="both", expand=True)
 
     def game_next(self):
+        player_name = self.name.get()
+        self.game.state.name = self.name.get().strip() or "Player"
+        self.game.state.gender = self.gender.get()
+
+        self.game.state.name = player_name
+
         self.authorization_page.pack_forget()
         self.main_frame.pack(fill="both", expand=True)
+        self.render_scene()
 
     def clear_choices(self):
         for widget in self.choices_frame.winfo_children():
@@ -403,14 +421,48 @@ class LifeRealityUI:
 
         self.clear_choices()
 
+        # if not scene["choices"]:
+        #     end_label = tk.Label(
+        #         self.choices_frame,
+        #         text="End of this path.",
+        #         bg=theme[2],
+        #         font=("Arial", 14)
+        #     )
+        #     end_label.pack(anchor="w", pady=5)
+        #     return
+
         if not scene["choices"]:
-            end_label = tk.Label(
+            end_card = tk.Frame(
                 self.choices_frame,
-                text="End of this path.",
-                bg=theme[2],
-                font=("Arial", 14)
+                bg=theme[4],
+                height=340
             )
-            end_label.pack(anchor="w", pady=5)
+            end_card.pack(fill="x", padx=12, pady=20)
+            end_card.pack_propagate(False)
+
+            inner = tk.Frame(end_card, bg="#f7f7f7")
+            inner.pack(fill="both", expand=True, padx=8, pady=8)
+
+            end_title = tk.Label(
+                inner,
+                text="Final Reflection",
+                font=("Impact", 24),
+                bg="#f7f7f7",
+                fg="black"
+            )
+            end_title.pack(pady=(28, 10))
+
+            end_message = tk.Label(
+                inner,
+                text="End of this path." + "\n" + "Summary:" + "\n" + summary(getattr(self.state, "summary", "")),
+                font=("Helvetica", 15),
+                bg="#f7f7f7",
+                fg="black",
+                wraplength=730,
+                justify="center"
+            )
+            end_message.pack(expand=True, padx=35, pady=(0, 30))
+
             return
 
         for i, choice in enumerate(scene["choices"]):
@@ -454,21 +506,6 @@ class LifeRealityUI:
             inner.bind("<Leave>", lambda e, w=inner: w.config(bg="#f7f7f7"))
             label.bind("<Enter>", lambda e, w=inner, l=label: (w.config(bg="#efefef"), l.config(bg="#efefef")))
             label.bind("<Leave>", lambda e, w=inner, l=label: (w.config(bg="#f7f7f7"), l.config(bg="#f7f7f7")))
-            
-            def on_choice_click(self, index):
-                self.game.make_choice(index)
-
-                self.summary_box.config(state="normal")
-                self.summary_box.delete("1.0", "end")
-                self.summary_box.insert("end", self.game.get_summary())
-                self.summary_box.config(state="disabled")
-
-                self.dialogue_box.config(state="normal")
-                self.dialogue_box.delete("1.0", "end")
-                self.dialogue_box.insert("end", self.game.get_current_scene()["text"])
-                self.dialogue_box.config(state="disabled")
-
-                self.render_choices()
 
             
 
