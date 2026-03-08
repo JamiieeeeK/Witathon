@@ -1,6 +1,7 @@
 #download: python -m pip install google-genai
 from google import genai
-#AIzaSyDxNNu8MT7WwYF8o60YwvmqZGrb9p_oum4
+#spare API keys:
+#AIzaSyDxNNu8MT7WwYF8o60YwvmqZGrb9p_oum4    
 #AIzaSyD_EuaMxPfuLnV3nwQlMhK1GxWjIb8GJs4
 client = genai.Client(api_key="AIzaSyAtoTehAB8OhFQEFIxpxMHVAHLMQiXn6-0")
 def short(character, setting, choice):
