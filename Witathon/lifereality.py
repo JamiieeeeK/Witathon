@@ -14,28 +14,25 @@ class LifeRealityUI:
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
         self.icon_path = os.path.join(self.script_dir, "healthy.ico")
 
-        # self.window.iconbitmap(self.icon_path)
+        self.window.iconbitmap(self.icon_path)
         self.window.resizable(False, False)
 
         self.game = Game()
 
-        self.window_width = 1400
-        self.window_height = 1000
-
-        # self.window_width = window.winfo_screenwidth()
-        # self.window_height = window.winfo_screenheight()
+        self.window_width = window.winfo_screenwidth()
+        self.window_height = window.winfo_screenheight()
 
         center_x = int(self.window_width /2 - self.window_width /2)
         center_y = int(self.window_height /2 - self.window_height /2)
 
-        # self.window_width = 1400
+        #self.window_width = 1400
         # self.window_height = 900
 
-        # screen_width = window.winfo_screenwidth()
-        # screen_height = window.winfo_screenheight()
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
 
-        # center_x = int((screen_width / 2) - (self.window_width / 2))
-        # center_y = int((screen_height / 2) - (self.window_height / 2))
+        center_x = int((screen_width / 2) - (self.window_width / 2))
+        center_y = int((screen_height / 2) - (self.window_height / 2))
 
         self.window.geometry(f"{self.window_width}x{self.window_height}+{center_x}+{center_y}")
 
